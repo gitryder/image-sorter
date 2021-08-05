@@ -5,28 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <script defer src="face-api.min.js"></script>
-  <script defer src="script.js"></script>
+  <script defer src="newScript.js"></script> 
   <title>Image Sorter</title>
   <style>
-    body {
+    * {
       margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column
+      border: 1px solid blueviolet;
     }
 
-    canvas {
+    body {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    img {
+      margin: auto;
+    }
+
+    .overlay {
       position: absolute;
-      top: 0;
-      left: 0;
     }
   </style>
 </head>
 <body>
-  <input type="file" id="imageUpload">
+
+  <div class="reference-wrapper">
+    <h1 class="title">Reference Image</h1>
+    <input id="input-reference-image" type="file" onchange="loadImageIntoTarget(id, 'reference-img-container')" accept=".jpg, .jpeg, .png">
+    <img src="" id="reference-img-container">
+  </div>
+
+  <div class="query-wrapper">
+    <h1 class="title">Query Image</h1>
+    <input id="input-query-image" type="file" onchange="loadImageIntoTarget(id, 'query-img-container').then(doAfterQueryImageLoaded)" accept=".jpg, .jpeg, .png">
+    <img src="" id="query-img-container">
+    <div class="overlay"></div>
+  </div>
+
 </body>
 </html>
