@@ -1,52 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <script defer src="face-api.min.js"></script>
-  <script defer src="newScript.js"></script> 
-  <title>Image Sorter</title>
-  <style>
-    * {
-      margin: 0;
-      border: 1px solid blueviolet;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script defer src="face-api.min.js"></script>
+    <script defer src="newScript.js"></script>
+    <title>Image Sorter</title>
+    <style>
+      * {
+        margin: 0;
+      }
 
-    body {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(auto, 1fr));
-    }
+      body {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
 
-    .wrapper {
-      display: grid;
-      grid-template-columns: 1fr;
-    }
+      .wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        border: 1px solid blueviolet;
+      }
 
-    img {
-      max-width: auto;
-      height: 100vh;
-    }
+      .query-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: fit-content(100%) fit-content(100%) 1fr;
+      }
 
-    .overlay {
-      position: absolute;
-    }
-  </style>
-</head>
-<body>
+      #img-div {
+        position: relative;
+      }
 
-  <div class="wrapper reference-wrapper">
-    <h1 class="title">Reference Image</h1>
-    <input id="input-reference-image" type="file" onchange="loadImageIntoTarget(id, 'reference-img-container')" accept=".jpg, .jpeg, .png">
-    <img src="" id="reference-img-container">
-  </div>
+      img {
+        max-width: auto;
+        height: 100vh;
+      }
 
-  <div class="wrapper query-wrapper">
-    <h1 class="title">Query Image</h1>
-    <input id="input-query-image" type="file" onchange="loadImageIntoTarget(id, 'query-img-container').then(doAfterQueryImageLoaded)" accept=".jpg, .jpeg, .png">
-    <img src="" id="query-img-container">
-    <div class="overlay"></div>
-  </div>
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper reference-wrapper">
+      <h1 class="title">Reference Image</h1>
+      <input
+        id="input-reference-image"
+        type="file"
+        onchange="loadImageIntoTarget(id, 'reference-img-container')"
+        accept=".jpg, .jpeg, .png"
+      />
+      <img src="" id="reference-img-container" />
+    </div>
 
-</body>
+    <div class="wrapper query-wrapper">
+      <h1 class="title">Query Image</h1>
+      <input
+        id="input-query-image"
+        type="file"
+        onchange="run()"
+        accept=".jpg, .jpeg, .png"
+      />
+      <!-- <div id="img-div">
+        <img src="" id="query-img-container"/>
+      </div> -->
+    </div>
+  </body>
 </html>
